@@ -81,14 +81,41 @@ function start() {
             collaberation: response.collaberation,
         };
 
-        console.log(data)
+            console.log(data)
 
         let fileName = 'READMe.md'
 
-        console.log(fileName);
-        console.log(data.username);
-        
+            console.log(fileName);
 
+            console.log(data.username);
+
+        const queryURL = "https://api.github.com/users/" + data.username;
+
+            Console.log(queryURL);
+
+        async function getLicenseBadge() {
+
+            console.log(data.license);
+        try {
+            if(data.license === "MIT"){
+                  return "[![Github license](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)";
+            
+            };
+        try {
+            if(data.license === "Apache 2.0"){
+                return "[!Github license](https://img.shields.io/badge/License-Apache-2.svg)](https://opensource.org/licenses/Apache-2.0)";
+            };
+        try {
+            if (data.license === "BSD 3"){
+                return "[![Github license](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)";
+          
+            };
+        try {
+            if (data.license === "GPL 3.0"){
+                return "[![Github license](https://img.shields.io/badge/License-.svg)](https://opensource.org/licenses/BSD-3-Clause)";
+          
+            };
         }
-    }
-}
+  
+
+        start();
