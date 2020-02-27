@@ -1,0 +1,19 @@
+{
+  "name": "good-readme-generator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cas81695/Good-ReadME-Generator.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cas81695/Good-ReadME-Generator/issues"
+  },
+  "homepage": "https://github.com/cas81695/Good-ReadME-Generator#readme"
+}
