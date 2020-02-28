@@ -1,7 +1,7 @@
 {
   "name": "good-readme-generator",
   "version": "1.0.0",
-  "description": "",
+  "description": "An application that uses a command line which collects a user's input to generate a README.md. This app will be activated with the following command:",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,10 +10,18 @@
     "type": "git",
     "url": "git+https://github.com/cas81695/Good-ReadME-Generator.git"
   },
+  "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/cas81695/Good-ReadME-Generator/issues"
   },
-  "homepage": "https://github.com/cas81695/Good-ReadME-Generator#readme"
+  "homepage": "https://github.com/cas81695/Good-ReadME-Generator#readme",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "gh-badges": "^2.2.1",
+    "inquirer": "^7.0.4",
+    "install": "^0.13.0",
+    "node-fetch": "^2.6.0"
+  }
 }
