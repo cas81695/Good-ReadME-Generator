@@ -104,29 +104,99 @@ function start() {
 
             Console.log(queryURL);
 
-        async function getLicenseBadge() {
+        function getLicenseBadge(license) {
 
-            console.log(data.license);
-        try {
-            if(data.license === "MIT"){
-                  return "[![Github license](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)";
+            try {
+                if(license === "Apache 2.0"){
+                    return "[!Github license](https://img.shields.io/badge/License-Apache-2.svg)";
+            }
+                if(license === "MIT"){
+                    return "[![Github license](https://img.shields.io/badge/License-MIT-yellow.svg)";
             
-            };
-        try {
-            if(data.license === "Apache 2.0"){
-                return "[!Github license](https://img.shields.io/badge/License-Apache-2.svg)](https://opensource.org/licenses/Apache-2.0)";
-            };
-        try {
-            if (data.license === "BSD 3"){
-                return "[![Github license](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)";
+            }
+                if (license === "BSD 3"){
+                    return "[![Github license](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)";
           
-            };
-        try {
-            if (data.license === "GPL 3.0"){
-                return "[![Github license](https://img.shields.io/badge/License-.svg)](https://opensource.org/licenses/BSD-3-Clause)";
-          
-            };
-        }
-  
+            }            
+                if (license === "GPL 3.0"){
+                    return "[![Github license](https://img.shields.io/badge/License-GPL-3.svg)";
 
-        start();
+            }
+                if (license === "None"){
+                    return "[![Github license](https://img.shields.io/badge/License-none.svg";
+
+            } 
+        } catch (error)
+
+        }
+
+    }
+
+
+  
+        function createReadme(data) {
+            const fileName = `README.md`;
+            let layout = 
+
+            `# ${data.title}
+
+            ${data.licenseLogo}
+
+            ## Description
+
+            $(data.description)
+
+            ## Table of Content
+
+            *[Installation](#installation)
+
+            *[Use](#use)
+
+            *[Credits](#credits)
+            
+            *[License](#license)
+            
+            *[Tests](#tests)
+            
+            *[Contributing](#contributing)
+
+            ## Intallation
+            
+            To install all of the necessary dependencies, run the following command:
+            
+            ${data.dependencies}
+            
+            ##Use
+            
+            ${data.use}
+            
+            ## Collaborators and/or Third Party Assets
+            
+            ${data.collaboration}
+            
+            ## License
+            
+            ${data.license}
+            
+            ## Tests
+            
+            To run tests, run the following command:
+            
+            ${data.test}
+            
+            ## Contribution
+            
+            ${data.contribution}
+            
+            ## Questions
+            
+            If you have any questions about the repo, please open up an issue or contact ${data.username}.
+            
+            $(data.avatar)`;
+
+            fs.writeFile(fileName, layout, err => {
+                if (err) throw err;
+                console.log("saved readme!");
+                console.log(fileName);
+            });
+        }
