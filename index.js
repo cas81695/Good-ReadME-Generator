@@ -6,6 +6,8 @@ const inquirer = require("inquirer");
 
 const util = require("util");
 
+start();
+
 
 function start() {
     inquirer.prompt([
@@ -80,29 +82,103 @@ function start() {
             contribution: response.contribution,
         
         };
+
             return data;
+
         }).then(data => {   
 
             createReadme(data);
 
+            data.avatar = showAvatar(data.username);
+
             data.licenseLogo = getLicenseBadge(data.license);
 
-
             return data;
+
+
         }).then(data => {
             console.log(data);
         });
     }
 
-        let fileName = 'READMe.md'
 
+  
+    function createReadme(data) {
+        const fileName = `README.md`;
+        let layout = 
+
+        `# ${data.title}
+
+        ${data.licenseLogo}
+
+        ## Description
+
+        $(data.description)
+
+        ## Table of Content
+
+        *[Installation](#installation)
+
+        *[Use](#use)
+
+        *[Credits](#credits)
+        
+        *[License](#license)
+        
+        *[Tests](#tests)
+        
+        *[Contributing](#contributing)
+
+        ## Intallation
+        
+        To install all of the necessary dependencies, run the following command:
+        
+        ${data.dependencies}
+        
+        ##Use
+        
+        ${data.use}
+        
+        ## Collaborators and/or Third Party Assets
+        
+        ${data.collaboration}
+        
+        ## License
+        
+        ${data.license}
+        
+        ## Tests
+        
+        To run tests, run the following command:
+        
+        ${data.test}
+        
+        ## Contribution
+        
+        ${data.contribution}
+        
+        ## Questions
+        
+        If you have any questions about the repo, please open up an issue or contact ${data.username}.
+        
+        $(data.avatar)`;
+
+        fs.writeFile(fileName, layout, err => {
+            if (err) throw err;
+            console.log("saved readme!");
             console.log(fileName);
+        });
+    }
 
-            console.log(data.username);
-
-        const queryURL = "https://api.github.com/users/" + data.username;
-
-            Console.log(queryURL);
+    async function showAvatar(username) {
+        const queryURL = "https://api.github.com/users/" + username;
+        try {
+            const response = await axios.get(queryURL);
+            return response.data.avatar_url;
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
         function getLicenseBadge(license) {
 
@@ -126,77 +202,8 @@ function start() {
                     return "[![Github license](https://img.shields.io/badge/License-none.svg";
 
             } 
-        } catch (error)
-
+        } catch (error) {
+            console.log(error);
         }
-
     }
 
-
-  
-        function createReadme(data) {
-            const fileName = `README.md`;
-            let layout = 
-
-            `# ${data.title}
-
-            ${data.licenseLogo}
-
-            ## Description
-
-            $(data.description)
-
-            ## Table of Content
-
-            *[Installation](#installation)
-
-            *[Use](#use)
-
-            *[Credits](#credits)
-            
-            *[License](#license)
-            
-            *[Tests](#tests)
-            
-            *[Contributing](#contributing)
-
-            ## Intallation
-            
-            To install all of the necessary dependencies, run the following command:
-            
-            ${data.dependencies}
-            
-            ##Use
-            
-            ${data.use}
-            
-            ## Collaborators and/or Third Party Assets
-            
-            ${data.collaboration}
-            
-            ## License
-            
-            ${data.license}
-            
-            ## Tests
-            
-            To run tests, run the following command:
-            
-            ${data.test}
-            
-            ## Contribution
-            
-            ${data.contribution}
-            
-            ## Questions
-            
-            If you have any questions about the repo, please open up an issue or contact ${data.username}.
-            
-            $(data.avatar)`;
-
-            fs.writeFile(fileName, layout, err => {
-                if (err) throw err;
-                console.log("saved readme!");
-                console.log(fileName);
-            });
-        }
