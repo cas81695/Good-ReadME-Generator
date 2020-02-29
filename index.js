@@ -69,7 +69,7 @@ function start() {
 
 
     ]).then(response => {
-        let data = {
+        const data = {
             username: response.username,
             title: response.title,
             description: response.description,
@@ -78,10 +78,21 @@ function start() {
             tests: response.tests,
             use: response.use,
             contribution: response.contribution,
-            collaberation: response.collaberation,
+        
         };
+            return data;
+        }).then(data => {   
 
-            console.log(data)
+            createReadme(data);
+
+            data.licenseLogo = getLicenseBadge(data.license);
+
+
+            return data;
+        }).then(data => {
+            console.log(data);
+        });
+    }
 
         let fileName = 'READMe.md'
 
