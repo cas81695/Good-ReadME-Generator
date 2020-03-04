@@ -1,6 +1,6 @@
 # Good ReadME Generator
 
-        [!Github license](https://img.shields.io/badge/License-Apache-2.svg)
+        [![Github license](https://img.shields.io/badge/License-MIT-yellow.svg)
 
         ## Description
 
@@ -36,7 +36,7 @@
         
         ## License
         
-        Apache 2.0
+        MIT
         
         ## Tests
         
@@ -56,6 +56,6 @@
         
         ## Questions
         
-        If you have any questions about the repo, please open up an issue or contact cas81695 via .
+        If you have any questions about the repo, please open up an issue or contact cas81695 via cas81695@gmail.com.
         
         $(data.avatar)

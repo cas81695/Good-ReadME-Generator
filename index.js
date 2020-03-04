@@ -80,17 +80,17 @@ function start() {
         type: "confirm",
         name: "link",
         message: "Would like to include a link to your application?",
-      },
-      {
+    },
+    {
         type: "input",
         name: "applicationLink",
         message: "If you would like to include a link to your application, please enter the href?",
-      },
-      {
+    },
+    {
         type: "input",
         name: "email",
         message: "Please enter your email address!",
-      },
+    },
 
     ]).then(response => {
         const data = {
@@ -109,7 +109,7 @@ function start() {
             link: response.link,
             applicationLink: response.applicationLink,
             email: response.email 
-        
+
         };
 
             return data;
