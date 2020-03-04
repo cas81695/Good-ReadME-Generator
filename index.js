@@ -4,8 +4,6 @@ const fs = require("fs");
 
 const inquirer = require("inquirer");
 
-const util = require("util");
-
 start();
 
 
@@ -53,8 +51,8 @@ function start() {
     },
     {
         type: "input",
-        name: "use",
-        message: "What does the user need to knoew about using the repo?"
+        name: "usage",
+        message: "What does the user need to know about using the app?"
 
     },
     {
@@ -64,22 +62,53 @@ function start() {
     },
     {
         type: "input",
-        name: "collaberation",
-        message: "Name all who collaberated with the project and third-party assets."
+        name: "collaboration",
+        message: "Name all who collaborated with the project and third-party assets."
 
-    }
-
+    },
+    {
+        type: "confirm",
+        name: "image",
+        message: "Would you like to include a screenshot of your application?",
+    },
+    {
+        type: "input",
+        name: "applicationImage",
+        message: "If you would like to include screenshot of your application, please enter the path or source!",
+    },
+    {
+        type: "confirm",
+        name: "link",
+        message: "Would like to include a link to your application?",
+      },
+      {
+        type: "input",
+        name: "applicationLink",
+        message: "If you would like to include a link to your application, please enter the href?",
+      },
+      {
+        type: "input",
+        name: "email",
+        message: "Please enter your email address!",
+      },
 
     ]).then(response => {
         const data = {
+
             username: response.username,
             title: response.title,
             description: response.description,
             license: response.license,
             dependencies: response.dependencies,
             tests: response.tests,
-            use: response.use,
+            usage: response.usage,
+            collaboration: response.collaboration,
             contribution: response.contribution,
+            image: response.image,
+            applicationImage: response.applicationImage,
+            link: response.link,
+            applicationLink: response.applicationLink,
+            email: response.email 
         
         };
 
@@ -87,21 +116,21 @@ function start() {
 
         }).then(data => {   
 
-            createReadme(data);
 
-            data.avatar = showAvatar(data.username);
+            data.displayedLink = applicationLink(data.link, data.applicationLink);
 
             data.licenseLogo = getLicenseBadge(data.license);
 
-            return data;
+            data.appScreenshot = showScreenshot(data.image, data.applicationImage);
 
-
-        }).then(data => {
-            console.log(data);
+            showAvatar(data.username).then(avatar => {
+                data.avatar = avatar;
+                createReadme(data);
+            });
+        
         });
+
     }
-
-
   
     function createReadme(data) {
         const fileName = `README.md`;
@@ -119,7 +148,7 @@ function start() {
 
         *[Installation](#installation)
 
-        *[Use](#use)
+        *[Usage](#usage)
 
         *[Credits](#credits)
         
@@ -156,19 +185,36 @@ function start() {
         ## Contribution
         
         ${data.contribution}
+
+        ----------------------------------------------
+
+        ${data.screenshot}
+
+        ${data.deployedLink}
         
         ## Questions
         
-        If you have any questions about the repo, please open up an issue or contact ${data.username}.
+        If you have any questions about the repo, please open up an issue or contact ${data.username} via {data.email}.
         
         $(data.avatar)`;
 
-        fs.writeFile(fileName, layout, err => {
-            if (err) throw err;
-            console.log("saved readme!");
-            console.log(fileName);
-        });
+    fs.writeFile(fileName, layout, err => {
+        if (err) throw err;
+        console.log("saved readme!");
+        console.log(fileName);
+    });
+}
+
+    function applicationLink(applicationLink, link) {
+        try {
+            if (link === true) {
+                return '<a href="http://' + applicationLink +' "> Link to Application </a>';
+            } else {
+                return ""
+            }
+        } catch (error) {
     }
+}
 
     async function showAvatar(username) {
         const queryURL = "https://api.github.com/users/" + username;
@@ -179,6 +225,19 @@ function start() {
             console.log(error);
         }
     }
+
+    function showScreenshot (applicationImage, image) {
+        try {
+            if (image === true) {
+                return '<img src=" '+ applicationImage +' "alt= "application image" width= "500px" height="200px"><br>';
+            } else {
+                return ""
+            }
+
+            } catch (error) {
+
+            }
+        }
 
         function getLicenseBadge(license) {
 
