@@ -154,7 +154,7 @@ function start() { inquirer.prompt([
 
             showAvatar(data.username).then(avatar => {
                 data.avatar = avatar;
-                createReadme(data);
+                createREADME(data);
             });
         
         });
@@ -236,7 +236,7 @@ async function showAvatar(username) {
   
     // This function creates the layout of the read me file 
 
-    function createReadme(data) {
+    function createREADME(data) {
 
         const fileName = `README.md`;
 
