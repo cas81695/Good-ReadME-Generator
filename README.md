@@ -1,10 +1,10 @@
-# test
+# Good ReadME Generator
 
 ![Github license](https://img.shields.io/badge/License-MIT-yellow.svg)
 
 ## Description
 
-test
+An application that uses a command line which collects a user's input to generate a README.md
 
 ## Table of Content
 
@@ -28,11 +28,11 @@ npm i
 
 ## Usage
 
-test
+The app is simple and only requires the user to answer as accurate as they can
 
 ## Collaborators and/or Third Party Assets
 
-test
+
 
 ## License
 
@@ -46,7 +46,7 @@ npm test
 
 ## Contribution
 
-test
+Nothing
 
 ----------------------------------------------
 
@@ -58,6 +58,6 @@ test
 
 ## Questions
 
-If you have any questions about the application, please open up an issue or contact cass81695 via cas81695@gmail.com.
+If you have any questions about the application, please open up an issue or contact cas81695 via cas81695@gmail.com.
 
-<img src= "undefined" width ="200px" height="200px">
+<img src= "https://avatars1.githubusercontent.com/u/58318559?v=4" width ="200px" height="200px">
