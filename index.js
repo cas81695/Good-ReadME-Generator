@@ -9,6 +9,7 @@ start();
 
 function start() {
     inquirer.prompt([
+
     {
         type: "input",
         name: "username",
@@ -28,14 +29,13 @@ function start() {
     {
         type: "list",
         name: "license",
-        message: "What type of license should be included for your project?",
-        choices: [
-            "Apache 2.0",
+        message: "What type of license should be included for the project?",
+        choices: 
+        ["Apache 2.0",
             "MIT",
             "BSD 3",
             "GPL 3.0",
-            "None"
-        ]
+            "None"]
     },
     {
         type: "input",
@@ -45,8 +45,8 @@ function start() {
     },
     {
         type: "input",
-        name: "tests",
-        message: "What command should be run to perform tests?",
+        name: "test",
+        message: "What command should be placed to perform a test?",
         default: "npm test"
     },
     {
@@ -96,18 +96,31 @@ function start() {
         const data = {
 
             username: response.username,
+
             title: response.title,
+
             description: response.description,
+
             license: response.license,
+
             dependencies: response.dependencies,
-            tests: response.tests,
+
+            test: response.test,
+
             usage: response.usage,
-            collaboration: response.collaboration,
+
             contribution: response.contribution,
+
+            collaboration: response.collaboration,
+
             image: response.image,
+
             applicationImage: response.applicationImage,
+
             link: response.link,
+
             applicationLink: response.applicationLink,
+
             email: response.email 
 
         };
@@ -117,9 +130,9 @@ function start() {
         }).then(data => {   
 
 
-            data.displayedLink = applicationLink(data.link, data.applicationLink);
+            data.displayedLink = getApplicationLink(data.link, data.applicationLink);
 
-            data.licenseLogo = getLicenseBadge(data.license);
+            data.licenseLogo = getLicenseLogo(data.license);
 
             data.appScreenshot = showScreenshot(data.image, data.applicationImage);
 
@@ -132,42 +145,21 @@ function start() {
 
     }
 
-async function showAvatar(username) {
-    const queryURL = "https://api.github.com/users/" + username;
-    try {
-        const response = await axios.get(queryURL);
-        return response.data.avatar_url;
-    } catch (error) {
-        console.log(error);
-    }
-}
 
-function showScreenshot (applicationImage, image) {
-    try {
-        if (image === true) {
-            return '<img src=" '+ applicationImage +' "alt= "application image" width= "500px" height="200px"><br>';
-        } else {
-            return ""
-        }
-
-        } catch (error) {
-
-        }
-    }
-
-function applicationLink(applicationLink, link) {
-            try {
-                if (link === true) {
-                    return '<a href="http://' + applicationLink +' "> Link to Application </a>';
-                } else {
-                    return ""
-                }
-                } catch (error) {
+    function getApplicationLink(applicationLink, link) {
+        try {
+            if (link === true) {
+                return '<a href="http://' + applicationLink +' "> Link to Application </a>';
+            } else {
+                return ""
             }
+            } catch (error) {
+                console.log(error);
         }
-        
+    }
 
-function getLicenseBadge(license) {
+
+    function getLicenseLogo(license) {
 
         try {
             if(license === "Apache 2.0"){
@@ -195,9 +187,36 @@ function getLicenseBadge(license) {
 }
 
 
+
+
+function showScreenshot (applicationImage, image) {
+    try {
+        if (image === true) {
+            return '<img src=" '+ applicationImage +' "alt= "application image" width= "500px" height="200px"><br>';
+        } else {
+            return ""
+        }
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+async function showAvatar(username) {
+        const queryURL = "https://api.github.com/users/" + username;
+        try {
+            const response = await axios.get(queryURL);
+            console.log(response.data.avatar_url);
+            return response.data.avatar_url;
+        } catch (error) {
+            console.log(error);
+        }
+    }
   
     function createReadme(data) {
+
         const fileName = `README.md`;
+
         let layout = 
 
         `# ${data.title}
@@ -220,17 +239,17 @@ function getLicenseBadge(license) {
         
         *[Tests](#tests)
         
-        *[Contributing](#contributing)
+        *[Contribution](#contribution)
 
-        ## Intallation
+        ## Intsallation
         
-        To install all of the necessary dependencies, run the following command:
+        To install all of the dependencies that are needed, run the following command:
         
         ${data.dependencies}
         
-        ##Use
+        ## Usage
         
-        ${data.use}
+        ${data.usage}
         
         ## Collaborators and/or Third Party Assets
         
@@ -252,17 +271,23 @@ function getLicenseBadge(license) {
 
         ----------------------------------------------
 
-        ${data.screenshot}
+        ${data.appScreenshot}
 
-        ${data.deployedLink}
+        ${data.displayedLink}
+
+        -----------------------------------------------
         
         ## Questions
         
-        If you have any questions about the repo, please open up an issue or contact ${data.username} via ${data.email}.
+        If you have any questions about the application, please open up an issue or contact ${data.username} via ${data.email}.
         
-        $(data.avatar)`;
+        <img src= "${data.avatar}" width ="200px" height="200px">`;
 
-    fs.writeFile(fileName, layout, err => {
+   
+        console.log(data.title);
+
+    
+        fs.writeFile(fileName, layout, err => {
         if (err) throw err;
         console.log("saved readme!");
         console.log(fileName);

@@ -18,17 +18,17 @@
         
         *[Tests](#tests)
         
-        *[Contributing](#contributing)
+        *[Contribution](#contribution)
 
-        ## Intallation
+        ## Intsallation
         
-        To install all of the necessary dependencies, run the following command:
+        To install all of the dependencies that are needed, run the following command:
         
         npm i
         
-        ##Use
+        ## Usage
         
-        undefined
+        Enter the data  as accurate as possible
         
         ## Collaborators and/or Third Party Assets
         
@@ -42,7 +42,7 @@
         
         To run tests, run the following command:
         
-        undefined
+        npm test
         
         ## Contribution
         
@@ -50,12 +50,14 @@
 
         ----------------------------------------------
 
-        undefined
+        
 
-        undefined
+        
+
+        -----------------------------------------------
         
         ## Questions
         
-        If you have any questions about the repo, please open up an issue or contact cas81695 via cas81695@gmail.com.
+        If you have any questions about the application, please open up an issue or contact cas81695 via cas81695@gmail.com.
         
-        $(data.avatar)
+        <img src= "https://avatars1.githubusercontent.com/u/58318559?v=4" width ="200px" height="200px">
