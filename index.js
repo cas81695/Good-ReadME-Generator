@@ -1,24 +1,28 @@
-const axios = require("axios");
+// These are the constants that are refered to the package.json
 
-const fs = require("fs-extra");
+const axios = require("axios");
 
 const inquirer = require("inquirer");
 
+const fs = require('fs-extra');
+
+// The beginning of the command line
+
 start();
 
+// The prompts that collect all of the data for the readme file
 
-function start() {
-    inquirer.prompt([
+function start() { inquirer.prompt([
 
     {
         type: "input",
         name: "username",
-        message: "What is your Github username?"
+        message: "What is the username to your Github?"
     },
     {
         type: "input",
         name: "title",
-        message: "What is the title of the project?"
+        message: "What is the project's title?"
     },
     {
         type: "input",
@@ -31,7 +35,7 @@ function start() {
         name: "license",
         message: "What type of license should be included for the project?",
         choices: 
-        ["Apache 2.0",
+            ["APACHE 2.0",
             "MIT",
             "BSD 3",
             "GPL 3.0",
@@ -46,7 +50,7 @@ function start() {
     {
         type: "input",
         name: "test",
-        message: "What command should be placed to perform a test?",
+        message: "What command should be run to perform a test?",
         default: "npm test"
     },
     {
@@ -56,7 +60,7 @@ function start() {
 
     },
     {
-        type:"input",
+        type: "input",
         name: "contribution",
         message: "What does the user need to know about contributing to the project?"
     },
@@ -70,6 +74,7 @@ function start() {
         type: "confirm",
         name: "image",
         message: "Would you like to include a screenshot of your application?",
+        // User replies either yes or no
     },
     {
         type: "input",
@@ -80,6 +85,7 @@ function start() {
         type: "confirm",
         name: "link",
         message: "Would like to include a link to your application?",
+        // User replies either yes or no
     },
     {
         type: "input",
@@ -92,8 +98,9 @@ function start() {
         message: "Please enter your email address!",
     },
 
-    ]).then(response => {
-        const data = {
+    ]).then(response => { const data = {
+
+        // This collects all of the data from the answers of the prompts
 
             username: response.username,
 
@@ -129,12 +136,21 @@ function start() {
 
         }).then(data => {   
 
+            //These are functions that are activated once has been recieved and create the assigned items of the read me
+
+            // The link to the app
 
             data.displayedLink = getApplicationLink(data.link, data.applicationLink);
 
+            // The logo/badge of the license choosen
+
             data.licenseLogo = getLicenseLogo(data.license);
 
-            data.appScreenshot = showScreenshot(data.image, data.applicationImage);
+            // The screenshot of the app given by the user
+
+            data.screenshot = showScreenshot(data.image, data.applicationImage);
+
+            // Provide the picture/avatar of the user pulled from thier github account
 
             showAvatar(data.username).then(avatar => {
                 data.avatar = avatar;
@@ -147,7 +163,11 @@ function start() {
 
 
     function getApplicationLink(applicationLink, link) {
-        try {
+
+        //This diplays the link of the application via the responce given by the user
+
+        try 
+        {
             if (link === true) {
                 return '<a href="http://' + applicationLink +' "> Link to Application </a>';
             } else {
@@ -161,35 +181,36 @@ function start() {
 
     function getLicenseLogo(license) {
 
+        // The logo is pulled from the links in response to the user
+
         try {
-            if(license === "Apache 2.0"){
-                return "[!Github license](https://img.shields.io/badge/License-Apache-2.svg)";
+            if(license === "APACHE 2.0"){
+                return "![Github license](https://img.shields.io/badge/License-Apache-2.svg)";
         }
             if(license === "MIT"){
-                return "[![Github license](https://img.shields.io/badge/License-MIT-yellow.svg)";
+                return "![Github license](https://img.shields.io/badge/License-MIT-yellow.svg)";
         
         }
             if (license === "BSD 3"){
-                return "[![Github license](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)";
+                return "![Github license](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)";
       
         }            
             if (license === "GPL 3.0"){
-                return "[![Github license](https://img.shields.io/badge/License-GPL-3.svg)";
+                return "![Github license](https://img.shields.io/badge/License-GPL-3.svg)";
 
         }
             if (license === "None"){
-                return "[![Github license](https://img.shields.io/badge/License-none.svg";
-
+                return ""
         } 
-    } catch (error) {
-        console.log(error);
+             } catch (error) {
+             console.log(error);
     }
 }
 
-
-
-
 function showScreenshot (applicationImage, image) {
+
+    // The link provided by the user allows the screenshot to be displayed
+
     try {
         if (image === true) {
             return '<img src=" '+ applicationImage +' "alt= "application image" width= "500px" height="200px"><br>';
@@ -213,6 +234,8 @@ async function showAvatar(username) {
         }
     }
   
+    // This function creates the layout of the read me file 
+
     function createReadme(data) {
 
         const fileName = `README.md`;
@@ -225,7 +248,7 @@ async function showAvatar(username) {
 
         ## Description
 
-        $(data.description)
+        ${data.description}
 
         ## Table of Content
 
@@ -237,7 +260,7 @@ async function showAvatar(username) {
         
         *[License](#license)
         
-        *[Tests](#tests)
+        *[Test](#test)
         
         *[Contribution](#contribution)
 
@@ -259,9 +282,9 @@ async function showAvatar(username) {
         
         ${data.license}
         
-        ## Tests
+        ## Test
         
-        To run tests, run the following command:
+        To run test, run the following command:
         
         ${data.test}
         
@@ -271,7 +294,7 @@ async function showAvatar(username) {
 
         ----------------------------------------------
 
-        ${data.appScreenshot}
+        ${data.screenshot}
 
         ${data.displayedLink}
 
