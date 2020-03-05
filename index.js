@@ -242,69 +242,69 @@ async function showAvatar(username) {
 
         let layout = 
 
-        `# ${data.title}
+`# ${data.title}
 
-        ${data.licenseLogo}
+${data.licenseLogo}
 
-        ## Description
+## Description
 
-        ${data.description}
+${data.description}
 
-        ## Table of Content
+## Table of Content
 
-        *[Installation](#installation)
+*[Installation](#installation)
 
-        *[Usage](#usage)
+*[Usage](#usage)
 
-        *[Credits](#credits)
-        
-        *[License](#license)
-        
-        *[Test](#test)
-        
-        *[Contribution](#contribution)
+*[Credits](#credits)
 
-        ## Intsallation
-        
-        To install all of the dependencies that are needed, run the following command:
-        
-        ${data.dependencies}
-        
-        ## Usage
-        
-        ${data.usage}
-        
-        ## Collaborators and/or Third Party Assets
-        
-        ${data.collaboration}
-        
-        ## License
-        
-        ${data.license}
-        
-        ## Test
-        
-        To run test, run the following command:
-        
-        ${data.test}
-        
-        ## Contribution
-        
-        ${data.contribution}
+*[License](#license)
 
-        ----------------------------------------------
+*[Test](#test)
 
-        ${data.screenshot}
+*[Contribution](#contribution)
 
-        ${data.displayedLink}
+## Intsallation
 
-        -----------------------------------------------
-        
-        ## Questions
-        
-        If you have any questions about the application, please open up an issue or contact ${data.username} via ${data.email}.
-        
-        <img src= "${data.avatar}" width ="200px" height="200px">`;
+To install all of the dependencies that are needed, run the following command:
+
+${data.dependencies}
+
+## Usage
+
+${data.usage}
+
+## Collaborators and/or Third Party Assets
+
+${data.collaboration}
+
+## License
+
+${data.license}
+
+## Test
+
+To run test, run the following command:
+
+${data.test}
+
+## Contribution
+
+${data.contribution}
+
+----------------------------------------------
+
+${data.screenshot}
+
+${data.displayedLink}
+
+-----------------------------------------------
+
+## Questions
+
+If you have any questions about the application, please open up an issue or contact ${data.username} via ${data.email}.
+
+<img src= "${data.avatar}" width ="200px" height="200px">`;
 
    
         console.log(data.title);
