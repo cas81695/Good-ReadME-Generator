@@ -264,7 +264,7 @@ ${data.description}
 
 *[Contribution](#contribution)
 
-## Intsallation
+## Installation
 
 To install all of the dependencies that are needed, run the following command:
 
