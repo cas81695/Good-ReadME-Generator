@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/cas81695/Good-ReadME-Generator#readme",
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "fs-extra": "^8.1.0",
     "gh-badges": "^2.2.1",
     "inquirer": "^7.0.6",
